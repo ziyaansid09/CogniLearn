@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 225 25% 5%;
+    --foreground: 190 100% 90%;
+
+    --card: 225 30% 8%;
+    --card-foreground: 190 100% 90%;
+
+    --popover: 225 30% 10%;
+    --popover-foreground: 190 100% 90%;
+
+    --primary: 185 100% 50%;
+    --primary-foreground: 225 25% 5%;
+
+    --secondary: 270 80% 60%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 225 20% 15%;
+    --muted-foreground: 210 20% 55%;
+
+    --accent: 270 80% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 85% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 145 80% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 40 95% 55%;
+    --warning-foreground: 225 25% 5%;
+
+    --border: 210 30% 18%;
+    --input: 210 30% 18%;
+    --ring: 185 100% 50%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 225 30% 6%;
+    --sidebar-foreground: 190 100% 90%;
+    --sidebar-primary: 185 100% 50%;
+    --sidebar-primary-foreground: 225 25% 5%;
+    --sidebar-accent: 270 80% 60%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 210 30% 15%;
+    --sidebar-ring: 185 100% 50%;
+
+    /* Custom tokens */
+    --neon-cyan: 185 100% 50%;
+    --neon-purple: 270 80% 60%;
+    --neon-blue: 220 100% 60%;
+    --glass-bg: 225 30% 10%;
+    --glass-border: 210 40% 20%;
+
+    --glow-cyan: 0 0 20px hsl(185 100% 50% / 0.4), 0 0 60px hsl(185 100% 50% / 0.1);
+    --glow-purple: 0 0 20px hsl(270 80% 60% / 0.4), 0 0 60px hsl(270 80% 60% / 0.1);
+    --glow-red: 0 0 20px hsl(0 85% 55% / 0.5), 0 0 60px hsl(0 85% 55% / 0.15);
+
+    --font-display: 'Orbitron', sans-serif;
+    --font-body: 'Rajdhani', sans-serif;
+    --font-mono: 'Share Tech Mono', monospace;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: 0.05em;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-card/60 backdrop-blur-xl border border-glass-border rounded-lg;
+  }
+
+  .glass-panel-glow {
+    @apply glass-panel;
+    box-shadow: var(--glow-cyan);
+  }
+
+  .glass-panel-purple {
+    @apply glass-panel;
+    box-shadow: var(--glow-purple);
+  }
+
+  .neon-text {
+    color: hsl(var(--neon-cyan));
+    text-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.5), 0 0 30px hsl(var(--neon-cyan) / 0.2);
+  }
+
+  .neon-text-purple {
+    color: hsl(var(--neon-purple));
+    text-shadow: 0 0 10px hsl(var(--neon-purple) / 0.5), 0 0 30px hsl(var(--neon-purple) / 0.2);
+  }
+
+  .system-notification {
+    @apply glass-panel border-destructive/50 p-4;
+    box-shadow: var(--glow-red);
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .xp-bar {
+    @apply h-2 rounded-full overflow-hidden bg-muted;
+  }
+
+  .xp-bar-fill {
+    @apply h-full rounded-full transition-all duration-1000 ease-out;
+    background: linear-gradient(90deg, hsl(var(--neon-cyan)), hsl(var(--neon-purple)));
+    box-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.5);
+  }
+
+  .stat-value {
+    font-family: var(--font-mono);
+    @apply text-2xl font-bold;
+    color: hsl(var(--neon-cyan));
+    text-shadow: 0 0 8px hsl(var(--neon-cyan) / 0.4);
+  }
+
+  .mission-item {
+    @apply glass-panel p-3 flex items-center gap-3 transition-all duration-300;
+  }
+
+  .mission-item:hover {
+    @apply border-primary/40;
+    box-shadow: 0 0 15px hsl(var(--neon-cyan) / 0.15);
+  }
+
+  .mission-complete {
+    @apply border-success/30;
+  }
+
+  .mission-failed {
+    @apply border-destructive/40;
+    box-shadow: var(--glow-red);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono-game {
+    font-family: var(--font-mono);
+  }
+
+  .text-glow-cyan {
+    text-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.5);
+  }
+
+  .text-glow-purple {
+    text-shadow: 0 0 10px hsl(var(--neon-purple) / 0.5);
+  }
+
+  .animate-glow-pulse {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-scan-line {
+    animation: scan-line 3s linear infinite;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes float-up {
+  0% { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--neon-cyan) / 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--neon-cyan) / 0.5);
+}
